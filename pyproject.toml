@@ -1,0 +1,14 @@
+[build-system]
+requires = ["setuptools>=67", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "devicebezels"
+version = "0.1.0"
+description = "Utilities for cataloging DeviceBezels assets."
+readme = "README.md"
+authors = [{ name = "DeviceBezels Maintainers" }]
+requires-python = ">=3.10"
+dependencies = [
+    "pillow>=10.3.0",
+]
