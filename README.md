@@ -94,3 +94,10 @@ This script scans for every file living under any `Device with Shadow` (case
 insensitive) folder and appends `with Shadow` to the filename so the image name
 mirrors its directory context. Pass `--dry-run` first if you just want to see
 which files would be touched.
+
+## Credits
+
+The bezels included in this catalog originate from:
+
+- [Meta Design Resources](https://design.facebook.com/tools/devices/)
+- [Apple Design Resources](https://developer.apple.com/design/resources/)
