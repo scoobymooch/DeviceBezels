@@ -26,6 +26,7 @@ Arguments (all optional):
 - `--devices-root`: location of the device folders (defaults to `bezels/devices`)
 - `--output`: JSON destination (defaults to `bezels/catalog.json`)
 - `--repo-root`: force the root that relative paths are built from
+- `--base-path`: optional URL/path prefix stored in the JSON so consumers can build download URLs (e.g. the repo's `raw.githubusercontent.com` URL)
 - `--pretty`: add indentation to the resulting JSON
 
 ### Catalog schema

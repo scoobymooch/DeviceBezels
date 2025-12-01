@@ -6,7 +6,7 @@ import re
 from datetime import datetime, timezone
 import math
 from pathlib import Path
-from typing import Dict, Iterable, List, Tuple
+from typing import Dict, Iterable, List, Optional, Tuple
 
 from PIL import Image, ImageDraw
 
@@ -36,6 +36,12 @@ def relative_path(path: Path, repo_root: Path) -> str:
         return path.relative_to(repo_root).as_posix()
     except ValueError:
         return str(path)
+
+
+def normalize_base_path(base_path: Optional[str]) -> Optional[str]:
+    if not base_path:
+        return None
+    return base_path.rstrip("/") + "/"
 
 
 def iter_device_pngs(devices_root: Path) -> Iterable[Tuple[str, str, Path]]:
@@ -176,6 +182,14 @@ def parse_args(argv: Iterable[str] | None = None) -> argparse.Namespace:
         action="store_true",
         help="Pretty print the JSON output with indentation.",
     )
+    parser.add_argument(
+        "--base-path",
+        default=None,
+        help=(
+            "Optional URL or path prefix to prepend when downloading assets; "
+            "stored as base_path in the catalog."
+        ),
+    )
     return parser.parse_args(argv)
 
 
@@ -192,6 +206,9 @@ def main(argv: Iterable[str] | None = None) -> None:
         output_path = (repo_root / output_path).resolve()
 
     catalog = build_catalog(devices_root, repo_root)
+    base_path = normalize_base_path(args.base_path)
+    if base_path:
+        catalog["base_path"] = base_path
     output_path.parent.mkdir(parents=True, exist_ok=True)
     with output_path.open("w", encoding="utf-8") as handle:
         json.dump(catalog, handle, indent=2 if args.pretty else None)
