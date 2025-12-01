@@ -129,7 +129,7 @@ def describe_png(category: str, device_name: str, path: Path, repo_root: Path) -
 
     return {
         "category": category,
-        "name": device_name,
+        "name": path.stem,
         "has_shadow": path_has_shadow(path.parent),
         "slug": slug,
         "relative_path": rel_path,
